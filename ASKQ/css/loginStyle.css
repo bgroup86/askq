@@ -1,0 +1,10 @@
+﻿.login {
+    background-image: url('../images/login-background.jpg');
+    background-size:100%;
+}
+.logo{
+    position:relative;
+    width:20%;
+    left:10%;
+
+}
