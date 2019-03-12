@@ -35,14 +35,14 @@ namespace ASKQ.Models.DAL
             {
                 if (p.Type == "Student")
                 {
-                    string qry = $"INSERT INTO ASKQstudent(Id, FirstName, LastName, gender, Email, Userpassword, img) VALUES('{p.Id}', '{p.FirstName}', '{p.LastName}', '{p.Gender}', '{p.Email}', '{p.Userpassword}', '{p.Img}')";
+                    string qry = $"INSERT INTO Student(Id, FirstName, LastName, gender, Email, Userpassword, img) VALUES('{p.Id}', '{p.FirstName}', '{p.LastName}', '{p.Gender}', '{p.Email}', '{p.Userpassword}', '{p.Img}')";
                     string connectionString = "ASKQConnection";
                     con = connect(connectionString);
                     cmd = new SqlCommand(qry, con);
                 }
                 else
                 {
-                    string qry = $"INSERT INTO ASKQlecturer(Id, FirstName, LastName, gender, Email, Userpassword, img) VALUES('{p.Id}', '{p.FirstName}', '{p.LastName}', '{p.Gender}', '{p.Email}', '{p.Userpassword}', '{p.Img}')";
+                    string qry = $"INSERT INTO Lecturer(Id, FirstName, LastName, gender, Email, Userpassword, img) VALUES('{p.Id}', '{p.FirstName}', '{p.LastName}', '{p.Gender}', '{p.Email}', '{p.Userpassword}', '{p.Img}')";
                     string connectionString = "ASKQConnection";
                     con = connect(connectionString);
                     cmd = new SqlCommand(qry, con);
@@ -78,14 +78,14 @@ namespace ASKQ.Models.DAL
             {
                 if (typeP == "Student")
                 {
-                    string qry = $"select * from ASKQstudent where id='{idP}'";
+                    string qry = $"select * from Student where id='{idP}'";
                     string connectionString = "ASKQConnection";
                     con = connect(connectionString);
                     cmd = new SqlCommand(qry, con);
                 }
                 else
                 {
-                    string qry = $"select * from ASKQlecturer where id='{idP}'";
+                    string qry = $"select * from Lecturer where id='{idP}'";
                     string connectionString = "ASKQConnection";
                     con = connect(connectionString);
                     cmd = new SqlCommand(qry, con);
@@ -131,11 +131,12 @@ namespace ASKQ.Models.DAL
             }
 
         }
-        public string Login(string PersonId, string userPassword)
+        public Person Login(string PersonId, string userPassword)
         {
             SqlConnection con;
             SqlCommand cmd;
-            string qry = $"select * from ASKQstudent where Id = '{PersonId}' and Userpassword = '{userPassword}'";
+            string qry = $"select * from Student where Id = '{PersonId}' and Userpassword = '{userPassword}'";
+            Person p = new Person();
             try
             {
                 string connectionString = "ASKQConnection";
@@ -149,22 +150,29 @@ namespace ASKQ.Models.DAL
             }
             try
             {
-                string userID = "";
                 SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
                 while (dr.Read())
                 {
-                    userID = Convert.ToString(dr["Id"]);
+                    p.Id = Convert.ToString(dr["Id"]);
+                    p.FirstName = Convert.ToString(dr["FirstName"]);
+                    p.LastName = Convert.ToString(dr["LastName"]);
+                    p.Gender = Convert.ToString(dr["gender"]);
+                    p.Email = Convert.ToString(dr["Email"]);
+                    p.Userpassword = Convert.ToString(dr["Userpassword"]);
+                    p.Img = Convert.ToString(dr["img"]);
+                    p.Type = "Student";
+
                 }
-                if (userID != "")
+                if (p.Id != "")
                 {
-                    return userID;
+                    return p;
                 }
                 else
                 {
                     SqlConnection con2;
                     SqlCommand cmd2;
-                    string qry2 = $"select * from ASKQlecturer where Id = '{PersonId}' and Userpassword = '{userPassword}'";
+                    string qry2 = $"select * from Lecturer where Id = '{PersonId}' and Userpassword = '{userPassword}'";
                     try
                     {
                         string connectionString = "ASKQConnection2";
@@ -182,9 +190,16 @@ namespace ASKQ.Models.DAL
 
                         while (dr2.Read())
                         {
-                            userID = Convert.ToString(dr2["Id"]);
+                            p.Id = Convert.ToString(dr2["Id"]);
+                            p.FirstName = Convert.ToString(dr2["FirstName"]);
+                            p.LastName = Convert.ToString(dr2["LastName"]);
+                            p.Gender = Convert.ToString(dr2["gender"]);
+                            p.Email = Convert.ToString(dr2["Email"]);
+                            p.Userpassword = Convert.ToString(dr2["Userpassword"]);
+                            p.Img = Convert.ToString(dr2["img"]);
+                            p.Type = "Lecturer";
                         }
-                            return userID;
+                            return p;
                     }
                     catch (Exception ex)
                     {

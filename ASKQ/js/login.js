@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-    //get all hobbies from DB
     $("#login-form").submit(f2);
 });
 function f2() {
@@ -13,8 +12,15 @@ function enterPerson() {
 }
 function successLog(data) {
     console.log(data);
-    alert("succses");
+    if (data["Type"] == "Student") {
+        window.location.href = "indexStudent.html";
+    }
+    else {
+        window.location.href = "indexLecturer.html";
+    }
+    swal("Welcome!", "Let's start learning!", "success");
 }
+
 function errorLog() {
-    alert("Error log");
+    swal("Oops", "Sorry, one of your details is incorrect", "error");
 }

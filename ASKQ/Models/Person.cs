@@ -48,11 +48,12 @@ namespace ASKQ.Models
            bool check = dbs.checkPersonId(PersonId, PersonType);
             return check;
         }
-        public string Login(string PersonId, string userPassword)
+        public Person Login(string PersonId, string userPassword)
         {
             DBservices dbs = new DBservices();
-            string idP = dbs.Login(PersonId, userPassword);
-            return idP;
+            Person p = new Person();
+             p = dbs.Login(PersonId, userPassword);
+            return p;
         }
     }
 }

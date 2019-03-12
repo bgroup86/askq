@@ -12,13 +12,13 @@ namespace ASKQ.Controllers
     {
         [HttpGet]
         [Route("api/login")]
-        public string GET(string PersonId, string userPassword)
+        public Person GET(string PersonId, string userPassword)
         {
             try
             {
                 Person p = new Person();
-                string idPerson = p.Login(PersonId, userPassword);
-                return idPerson;
+                return p.Login(PersonId, userPassword);
+                 
             }
             catch (Exception ex)
             {
