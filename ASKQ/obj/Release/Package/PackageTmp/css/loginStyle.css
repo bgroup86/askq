@@ -1,0 +1,16 @@
+﻿.login {
+    background-image: url('../images/login-background.jpg');
+    background-size: 100%;
+    height: 563px;
+}
+
+.logo{
+    position:relative;
+    width:18%;
+    left:2%;
+
+}
+
+.container {
+    background-color: #ffffffc9;
+}

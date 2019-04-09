@@ -1,0 +1,33 @@
+﻿#newCourse{
+margin-bottom: 15px;
+}
+.course {
+    top: 20%;
+    left: 5%;
+}
+.btn-outline-secondary{
+    position:center;
+}
+h2.mb-0.text-lg-center.font-weight-bold {
+    text-align: center;
+    font-family: Poppins;
+    padding-bottom: 15px;
+}
+.updateimg{
+    position:relative;
+    left:35%;
+}
+#courseName{
+    text-align:center;
+    font-size:40px;
+}
+.navbar-dark .navbar-toggler {
+    color: black;
+    border-color: transparent;
+
+
+}
+.navbar-dark .navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox=\'0 0 30 30\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath stroke=\'rgba(0, 0, 0, 1)\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-miterlimit=\'10\' d=\'M4 7h22M4 15h22M4 23h22\'/%3E%3C/svg%3E');
+    width:20px;  
+}
