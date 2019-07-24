@@ -42,6 +42,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExcelLibrary">
+      <HintPath>..\ExcelLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -51,6 +54,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -170,18 +174,45 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AddFileController.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LessonController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\MultipleChoiceQuestionController.cs" />
+    <Compile Include="Controllers\QuestionAndAnswerController.cs" />
+    <Compile Include="Controllers\RealTimeQuestionController.cs" />
+    <Compile Include="Controllers\StudentInLessonController.cs" />
+    <Compile Include="Controllers\StudentLikesController.cs" />
+    <Compile Include="Controllers\studentsAnswersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\YesNoQuestionController.cs" />
+    <Compile Include="filesCode\UploadHandler.ashx.cs">
+      <DependentUpon>UploadHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\AddFile.cs" />
     <Compile Include="Models\DAL\DBservices.cs" />
+    <Compile Include="Models\Excel.cs" />
     <Compile Include="Models\Lecturer.cs" />
+    <Compile Include="Models\Lesson.cs" />
     <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\MultipleChoiceQuestion.cs">
+      <Generator>C:\Users\netta sapir\Desktop\AskQ2\ASKQ\Models\QuestionAndAnswer.cs</Generator>
+    </Compile>
+    <Compile Include="Models\QuestionAndAnswer.cs" />
+    <Compile Include="Models\RealTimeQuestion.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentInLesson.cs" />
+    <Compile Include="Models\StudentLikes.cs" />
+    <Compile Include="Models\studentsAnswers.cs" />
+    <Compile Include="Models\yesNoAnswer.cs" />
+    <Compile Include="Models\YesNoQuestion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1885,10 +1916,13 @@
     <Content Include="assets\vendor\prismjs\themes\prism.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\chatStyle.css" />
     <Content Include="css\indexLecturer.css" />
     <Content Include="css\loginStyle.css" />
     <Content Include="css\signUp Style.css" />
+    <Content Include="css\studentchat.css" />
     <Content Include="css\style.css" />
+    <Content Include="css\yesNoAnswerStyle.css" />
     <Content Include="examples\icons.html" />
     <Content Include="examples\login.html" />
     <Content Include="examples\maps.html" />
@@ -1918,19 +1952,44 @@
     <Content Include="fonts\poppins\roboto-condensed-v16-latin-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="gulpfile.js" />
+    <Content Include="html\ChatStudent.html" />
+    <Content Include="html\ChatNew.html" />
     <Content Include="html\indexStudent.html" />
+    <Content Include="html\loginLesson.html" />
+    <Content Include="html\sendAnswer.html" />
+    <Content Include="html\sendQuestion.html" />
     <Content Include="html\signUp.html" />
     <Content Include="html\login.html" />
+    <Content Include="html\yesNoAnswer.html" />
+    <Content Include="images\add.png" />
+    <Content Include="images\back-button.png" />
+    <Content Include="images\check-button.png" />
+    <Content Include="images\check-mark.png" />
+    <Content Include="images\clock.png" />
+    <Content Include="images\cross-outline.png" />
+    <Content Include="images\delete-button.png" />
+    <Content Include="images\edit.png" />
+    <Content Include="images\good.png" />
+    <Content Include="images\information.png" />
+    <Content Include="images\late.png" />
+    <Content Include="images\like.png" />
+    <Content Include="images\like_black.png" />
     <Content Include="images\login-background.jpg" />
     <Content Include="images\Logo.png" />
-    <Content Include="images\signin-image.jpg" />
-    <Content Include="images\signup-image.jpg" />
+    <Content Include="images\logout.png" />
+    <Content Include="images\return.png" />
     <Content Include="html\indexLecturer.html" />
+    <Content Include="images\sad.png" />
+    <Content Include="images\wLogo.png" />
+    <Content Include="js\ChatNew.js" />
     <Content Include="js\imgUpload.js" />
     <Content Include="js\indexLecturer.js" />
+    <Content Include="js\indexStudent.js" />
     <Content Include="js\login.js" />
-    <Content Include="js\main.js" />
+    <Content Include="js\loginLesson.js" />
+    <Content Include="js\question.js" />
     <Content Include="js\sign up.js" />
+    <Content Include="js\studentChat.js" />
     <Content Include="Scripts\ajaxCall.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -2238,6 +2297,8 @@
     <Content Include="assets\vendor\prismjs\components.json" />
     <Content Include="composer.json" />
     <Content Include="package.json" />
+    <Content Include="filesCode\UploadHandler.ashx" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -2286,6 +2347,35 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -2304,7 +2394,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58465</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58465/</IISUrl>
+          <IISUrl>http://localhost:3000/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

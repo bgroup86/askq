@@ -55,5 +55,10 @@ namespace ASKQ.Models
              p = dbs.Login(PersonId, userPassword);
             return p;
         }
+        public void UpdateProfile()
+        {
+            DBservices dbs = new DBservices();
+            dbs.UpdateProfile(this);
+        }
     }
 }

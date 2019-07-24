@@ -33,16 +33,20 @@ namespace ASKQ.Controllers
             bool check = p.checkPersonId(PersonId, PersonType);
             return check;
         }
+        [HttpPut]
+        [Route("api/person")]
+        public void Put([FromBody]Person P)
+        {
+            try
+            {
+                P.UpdateProfile();
+            }
+            catch (Exception ex)
+            {
 
-     
-        //// PUT api/<controller>/5
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
+                throw new Exception("Error in update Person" + ex);
+            }
+        }
 
-        //// DELETE api/<controller>/5
-        //public void Delete(int id)
-        //{
-        //}
     }
 }
